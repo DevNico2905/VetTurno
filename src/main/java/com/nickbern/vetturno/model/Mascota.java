@@ -1,4 +1,4 @@
-package com.nickbern.vetturno.entity;
+package com.nickbern.vetturno.model;
 
 // id, nombre, especie, raza, propietario
 // Nombre, especie y propietario obligatorios; pertenece a un solo responsable.

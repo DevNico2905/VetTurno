@@ -1,4 +1,4 @@
-package com.nickbern.vetturno.entity;
+package com.nickbern.vetturno.model;
 
 //  id, nombre, teléfono, email
 //  Nombre y teléfono obligatorios; email válido; puede tener varias mascotas.
