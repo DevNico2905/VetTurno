@@ -1,10 +1,15 @@
 package com.nickbern.vetturno.dto;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public record PropietarioRequest(
-        @NotBlank String nombre,
-        @NotBlank String telefono,
-        @Email String email
+
+        @NotBlank(message = "El nombre es obligatorio")
+        String nombre,
+
+        @NotBlank(message = "El telefono es obligatorio")
+        String telefono,
+
+        @Email
+        String email
 ) {}
