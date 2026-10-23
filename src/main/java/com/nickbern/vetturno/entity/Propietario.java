@@ -1,15 +1,12 @@
 package com.nickbern.vetturno.entity;
 
-// id, nombre, teléfono, email
-//Nombre y teléfono obligatorios; email válido; puede tener varias mascotas.
+//  id, nombre, teléfono, email
+//  Nombre y teléfono obligatorios; email válido; puede tener varias mascotas.
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "propietarios")
@@ -33,9 +30,4 @@ public class Propietario {
     @NotBlank
     @Column(nullable = false, unique = true)
     private String telefono;
-
-    @OneToMany(mappedBy = "propietario")
-    @Builder.Default
-    private List<Mascota> mascotas = new ArrayList<>();
-
 }

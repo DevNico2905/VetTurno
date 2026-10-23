@@ -4,6 +4,7 @@ package com.nickbern.vetturno.entity;
 // Nombre, especie y propietario obligatorios; pertenece a un solo responsable.
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -18,8 +19,12 @@ public class Mascota {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
+    @Column(nullable = false)
     private String nombre;
 
+    @NotBlank
+    @Column(nullable = false)
     private String especie;
 
     private String raza;
