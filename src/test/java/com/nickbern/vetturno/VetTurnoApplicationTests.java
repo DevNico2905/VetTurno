@@ -1,4 +1,4 @@
-package com.nick_bern.VetTurno;
+package com.nickbern.vetturno;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

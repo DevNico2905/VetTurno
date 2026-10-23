@@ -1,4 +1,4 @@
-package com.nick_bern.VetTurno;
+package com.nickbern.vetturno;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
