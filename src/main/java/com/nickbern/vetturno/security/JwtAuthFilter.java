@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -31,6 +32,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         String header = request.getHeader("Authorization");
 
+        // Sin header Bearer: la petición sigue sin identidad (las rutas protegidas responderán 401)
         if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
@@ -41,14 +43,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         if (jwtService.esValido(token)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            String email = jwtService.extraerEmail(token);
-            UserDetails userDetails = usuarioDetailsService.loadUserByUsername(email);
+            try {
+                String email = jwtService.extraerEmail(token);
+                UserDetails userDetails = usuarioDetailsService.loadUserByUsername(email);
 
-            UsernamePasswordAuthenticationToken auth =
-                    new UsernamePasswordAuthenticationToken(
-                            userDetails, null, userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(
+                                userDetails, null, userDetails.getAuthorities());
 
-            SecurityContextHolder.getContext().setAuthentication(auth);
+                SecurityContextHolder.getContext().setAuthentication(auth);
+
+            } catch (UsernameNotFoundException e) {
+                // Token con firma válida, pero el usuario ya no existe (p. ej. la base se reinició).
+                // No se establece identidad: la petición continúa como no autenticada → 401.
+            }
         }
 
         filterChain.doFilter(request, response);
