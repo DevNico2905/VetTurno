@@ -1,9 +1,6 @@
 package com.nickbern.vetturno.dto;
-import com.nickbern.vetturno.model.Mascota;
-import com.nickbern.vetturno.model.Propietario;
-import com.nickbern.vetturno.model.Veterinario;
-import lombok.Builder;
 
+import lombok.Builder;
 import java.time.LocalDateTime;
 
 @Builder

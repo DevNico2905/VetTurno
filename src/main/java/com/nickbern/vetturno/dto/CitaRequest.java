@@ -8,7 +8,9 @@ import jakarta.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 public record CitaRequest(
+
         // fechaHora, motivo, mascotaId, veterinarioId
+
         @NotNull(message = "La fecha y hora son obligatorias")
         @Future(message = "La cita debe ser en una fecha futura")
         LocalDateTime fechaHora,
