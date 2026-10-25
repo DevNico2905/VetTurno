@@ -8,9 +8,9 @@ import com.nickbern.vetturno.model.Mascota;
 import com.nickbern.vetturno.model.Propietario;
 import com.nickbern.vetturno.repository.MascotaRepository;
 import com.nickbern.vetturno.repository.PropietarioRepository;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -20,6 +20,7 @@ public class MascotaService {
     private final MascotaRepository mascotaRepository;
     private final PropietarioRepository propietarioRepository;
 
+    @Transactional
     public MascotaDTO crearMascota(MascotaRequest request){
 
         Propietario dbPropietario = propietarioRepository.findById(request.propietarioId())
